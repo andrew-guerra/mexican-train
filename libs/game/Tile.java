@@ -10,6 +10,14 @@ public class Tile {
         this.orientation = true;
     }
 
+    public int getFirstFace() {
+        return orientation ? face1 : face2;
+    }
+
+    public int getSceondFace() {
+        return orientation ? face2 : face1;
+    }
+
     public boolean isCompatible(int value) {
         return this.hasValue(value);
     }
@@ -66,11 +74,11 @@ public class Tile {
 
         Tile tileObj = (Tile) obj;
 
-        if(this.isDouble() || tileObj.isDouble()){
+        if(this.isDouble() && tileObj.isDouble()){
             return this.hasValue(face1);
         }
         
-        return this.hasValue(tileObj.face1) && this.hasValue(face2);
+        return this.hasValue(tileObj.face1) && this.hasValue(tileObj.face2);
     }
 
     @Override
