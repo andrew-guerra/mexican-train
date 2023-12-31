@@ -14,4 +14,19 @@ public class PlayerMove {
     public String toString() {
         return String.format("tile: %s train: %d player: %d", this.tile.toString(), this.trainIndex, this.playerIndex);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) {
+            return true;
+        }
+
+        if(!(obj instanceof PlayerMove)) {
+            return false;
+        }
+
+        PlayerMove otherPlayerMove = (PlayerMove) obj;
+
+        return this.tile.equals(otherPlayerMove.tile) && this.trainIndex == otherPlayerMove.trainIndex && this.playerIndex == otherPlayerMove.playerIndex;
+    }
 }

@@ -1,6 +1,7 @@
 package libs.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Board {
     private final Train[] trains;
@@ -9,7 +10,7 @@ public class Board {
         this.trains = trains;
     }
 
-    public ArrayList<PlayerMove> generateMoves(Tile tile, int playerIndex) {
+    public PlayerMove[] generateMoves(Tile tile, int playerIndex) {
         ArrayList<PlayerMove> moves = new ArrayList<>();
 
         for(Train train : this.trains) {
@@ -18,7 +19,7 @@ public class Board {
             }
         }
 
-        return moves;
+        return (PlayerMove[]) moves.toArray(new PlayerMove[moves.size()]);
     }
 
     public boolean isPlayibleByPlayer(PlayerMove playerMove) {
@@ -56,5 +57,20 @@ public class Board {
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) {
+            return true;
+        }
+
+        if(!(obj instanceof Board)) {
+            return false;
+        }
+
+        Board otherBoard = (Board) obj;
+
+        return Arrays.equals(this.trains, otherBoard.trains);
     }
 }

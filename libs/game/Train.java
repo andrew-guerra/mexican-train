@@ -2,6 +2,7 @@ package libs.game;
 
 import java.util.Stack;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Train {
     private final Stack<Tile> tiles;
@@ -115,5 +116,21 @@ public class Train {
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) {
+            return true;
+        }
+
+        if(!(obj instanceof Train)) {
+            return false;
+        }
+
+        Train otherTrain = (Train) obj;
+
+        return this.tiles.equals(otherTrain.tiles) && (this.startValue == otherTrain.startValue) &&
+               (this.trainIndex == otherTrain.trainIndex) && (this.isPublic == otherTrain.isPublic);
     }
 }
