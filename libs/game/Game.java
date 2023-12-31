@@ -3,6 +3,7 @@ package libs.game;
 import java.util.Collections;
 import java.util.Stack;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Game {
     private Board board;
@@ -151,7 +152,7 @@ public class Game {
         Hand hand = this.players[playerIndex].getHand();
 
         for(Tile tile : hand.getTiles()) {
-            possiblePlayerMoves.addAll(this.board.generateMoves(tile, playerIndex));
+            possiblePlayerMoves.addAll(Arrays.asList(this.board.generateMoves(tile, playerIndex)));
         }
 
         return possiblePlayerMoves;
