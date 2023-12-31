@@ -16,16 +16,20 @@ public class Train {
         this.isPublic = false;
     }
 
-    public boolean isPlayible(Tile tile) {
+    public boolean isPlayible(Tile tile, boolean staticOrientation) {
         if(tile == null) {
             return false;
         }
 
         if(this.isEmpty()) {
-            return tile.isCompatible(this.startValue);
+            return staticOrientation ? this.startValue == tile.getFirstFace() : tile.isCompatible(this.startValue);
         }
 
-        return tile.isCompatible(this.tiles.peek());
+        return staticOrientation ? this.tiles.peek().getSceondFace() == tile.getFirstFace() : tile.isCompatible(this.tiles.peek());
+    }
+
+    public boolean isPlayible(Tile tile) {
+        return this.isPlayible(tile, false);
     }
 
     public boolean isMergeable(Train train) {
@@ -37,7 +41,7 @@ public class Train {
             return true;
         }
 
-        return this.isPlayible(train.tiles.firstElement());
+        return this.isPlayible(train.tiles.firstElement(), true);
     }
 
     public Tile[] playible(Tile[] tiles) {
